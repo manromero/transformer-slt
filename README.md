@@ -29,7 +29,6 @@ pip install -r requirements.txt
 
 # install OpenNMT-py
 python setup.py install
-
 ```
 
 ### Known bugs for Windows users
@@ -42,7 +41,6 @@ python
 > torch.cuda.is_available()
 # True -> The installation has been successfully completed and it is possible to use the graphics card for training.
 # False -> Despite a successful installation, it will not be possible to make use of the graphics card during training, which will cause errors during training.
-
 ```
 
 If false:
@@ -57,7 +55,6 @@ If false:
 ```
 pip uninstall torch
 pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
-
 ```
 
 ## Sample Usage
