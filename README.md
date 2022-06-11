@@ -1,10 +1,15 @@
 # transformer-slt
-This repository gathers data and code supporting the experiments in the paper [Better Sign Language Translation with STMC-Transformer](https://www.aclweb.org/anthology/2020.coling-main.525/).
+
+This repository fork of the orignal [transformer-slt](https://github.com/kayoyin/transformer-slt), has been created with the aim of supporting the study of intelligent models for sign language translation (SLT), which is part of the Master's Thesis (TFM) carried out for the [Master in Computer Engineering (MII)](https://www.mii.us.es/) of the [University of Seville](https://www.us.es/).
+
+The repository gathers data and code supporting the experiments in the paper [Better Sign Language Translation with STMC-Transformer](https://www.aclweb.org/anthology/2020.coling-main.525/).
 
 ## Installation
+
 This code is based on [OpenNMT](https://github.com/OpenNMT/OpenNMT-py) v1.0.0 and requires all of its dependencies (`torch==1.6.0`). Additional requirements are [NLTK](https://www.nltk.org/) for NMT evaluation metrics.
 
 The recommended way to install is shown below:
+
 ```
 # create a new virtual environment
 virtualenv --python=python3 venv
@@ -27,10 +32,11 @@ python setup.py install
 ### Data processing
 
 ```
-onmt_preprocess -train_src data/phoenix2014T.train.gloss -train_tgt data/phoenix2014T.train.de -valid_src data/phoenix2014T.dev.gloss -valid_tgt data/phoenix2014T.dev.de -save_data data/dgs -lower 
+onmt_preprocess -train_src data/phoenix2014T.train.gloss -train_tgt data/phoenix2014T.train.de -valid_src data/phoenix2014T.dev.gloss -valid_tgt data/phoenix2014T.dev.de -save_data data/dgs -lower
 ```
 
 ### Training
+
 ```
 python  train.py -data data/dgs -save_model model -keep_checkpoint 1 \
           -layers 2 -rnn_size 512 -word_vec_size 512 -transformer_ff 2048 -heads 8  \
@@ -45,11 +51,13 @@ python  train.py -data data/dgs -save_model model -keep_checkpoint 1 \
 ```
 
 ### Inference
+
 ```
 python translate.py -model model [model2 model3 ...] -src data/phoenix2014T.test.gloss -output pred.txt -gpu 0 -replace_unk -beam_size 4
 ```
 
 ### Scoring
+
 ```
 # BLEU-1,2,3,4
 python tools/bleu.py 1 pred.txt data/phoenix2014T.test.de
@@ -65,10 +73,13 @@ python tools/meteor.py pred.txt data/phoenix2014T.test.de
 ```
 
 # To dos:
-* Add configurations & steps to recreate paper results
+
+- Add configurations & steps to recreate paper results
 
 # Reference
-Please cite the paper below if you found the resources in this repository useful:
+
+Please cite the original paper below if you found the resources in this repository useful:
+
 ```
 @inproceedings{yin-read-2020-better,
     title = "Better Sign Language Translation with {STMC}-Transformer",
