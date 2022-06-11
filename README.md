@@ -6,24 +6,57 @@ The repository gathers data and code supporting the experiments in the paper [Be
 
 ## Installation
 
+May differs from the original in [transformer-slt](https://github.com/kayoyin/transformer-slt):
+
 This code is based on [OpenNMT](https://github.com/OpenNMT/OpenNMT-py) v1.0.0 and requires all of its dependencies (`torch==1.6.0`). Additional requirements are [NLTK](https://www.nltk.org/) for NMT evaluation metrics.
 
 The recommended way to install is shown below:
 
 ```
-# create a new virtual environment
-virtualenv --python=python3 venv
-source venv/bin/activate
-
 # clone the repo
 git clone https://github.com/kayoyin/transformer-slt.git
 cd transformer-slt
+
+# create a new virtual environment
+virtualenv --python=python3 venv
+# Activate linux:
+source venv/bin/activate
+# Activate windows:
+.\venv\Scripts\activate
 
 # install python dependencies
 pip install -r requirements.txt
 
 # install OpenNMT-py
 python setup.py install
+
+```
+
+### Known bugs for Windows users
+
+#### Verify that torch has been installed correctly
+
+```
+python
+> import torch
+> torch.cuda.is_available()
+# True -> The installation has been successfully completed and it is possible to use the graphics card for training.
+# False -> Despite a successful installation, it will not be possible to make use of the graphics card during training, which will cause errors during training.
+
+```
+
+En ese caso:
+
+1. Make sure you have configured CUDA and CUDNN correctly. An example configuration for Windows 11 is available [here](https://youtu.be/OEFKlRSd8Ic?t=123).
+2. Perform the Torch installation using the commands available from the [official PyTorch website](https://pytorch.org/get-started/locally/), removing the installed version beforehand.
+
+![PyTorch install command example](assets_readme/pytorch_install_command.jpg)
+
+**Example**
+
+```
+pip uninstall torch
+pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
 
 ```
 
@@ -36,6 +69,8 @@ onmt_preprocess -train_src data/phoenix2014T.train.gloss -train_tgt data/phoenix
 ```
 
 ### Training
+
+**Linux users**:
 
 ```
 python  train.py -data data/dgs -save_model model -keep_checkpoint 1 \
@@ -50,10 +85,28 @@ python  train.py -data data/dgs -save_model model -keep_checkpoint 1 \
           -world_size 1 -gpu_ranks 0
 ```
 
+**Windows users**:
+
+```
+python train.py -data data/dgs -save_model model -keep_checkpoint 1 ^
+          -layers 2 -rnn_size 512 -word_vec_size 512 -transformer_ff 2048 -heads 8 ^
+          -encoder_type transformer -decoder_type transformer -position_encoding ^
+          -max_generator_batches 2 -dropout 0.1 ^
+          -early_stopping 3 -early_stopping_criteria accuracy ppl ^
+          -batch_size 2048 -accum_count 3 -batch_type tokens -normalization tokens ^
+          -optim adam -adam_beta2 0.998 -decay_method noam -warmup_steps 3000 -learning_rate 0.5 ^
+          -max_grad_norm 0 -param_init 0 -param_init_glorot ^
+          -label_smoothing 0.1 -valid_steps 100 -save_checkpoint_steps 100 ^
+          -world_size 1 -gpu_ranks 0
+```
+
+Runtime: 5 min (Approximate, using NVIDIA GeForce RTX 3070).
+
 ### Inference
 
 ```
 python translate.py -model model [model2 model3 ...] -src data/phoenix2014T.test.gloss -output pred.txt -gpu 0 -replace_unk -beam_size 4
+# Example: python translate.py -model model_step_1600.pt -src data/phoenix2014T.test.gloss -output pred.txt -gpu 0 -replace_unk -beam_size 4
 ```
 
 ### Scoring
