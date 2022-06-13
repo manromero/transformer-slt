@@ -14,7 +14,7 @@ The recommended way to install is shown below:
 
 ```
 # clone the repo
-git clone https://github.com/kayoyin/transformer-slt.git
+git clone https://github.com/manromero/transformer-slt
 cd transformer-slt
 
 # create a new virtual environment
