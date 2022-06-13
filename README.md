@@ -97,7 +97,7 @@ python train.py -data data/dgs -save_model model -keep_checkpoint 1 ^
           -world_size 1 -gpu_ranks 0
 ```
 
-Runtime: 5 min (Approximate, using NVIDIA GeForce RTX 3070).
+**Runtime:** 5 min (Approximate, using NVIDIA GeForce RTX 3070).
 
 ### Inference
 
