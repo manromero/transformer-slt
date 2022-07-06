@@ -122,6 +122,14 @@ python tools/rouge.py pred.txt data/phoenix2014T.test.de
 python tools/meteor.py pred.txt data/phoenix2014T.test.de
 ```
 
+### Unified flow and hyperparameter scanning
+
+To facilitate the execution of the flow in a unified way, while enabling hyperparameter scanning, the python file "scan.py" has been created (Not available in the original repository). In it we can configure as a grid the combinations of hyperparameters that we want to test. Once configured, the complete training, inference and evaluation flow will be executed for each of the combinations set.
+
+```
+python scan.py
+```
+
 # To dos:
 
 - Add configurations & steps to recreate paper results

@@ -21,8 +21,8 @@ class Rouge:
     KEEP_CANNOT_IN_ONE_WORD_REVERSED = re.compile('_cannot_')
 
     WORDNET_KEY_VALUE = {}
-    WORDNET_DB_FILEPATH = 'wordnet_key_value.txt'
-    WORDNET_DB_FILEPATH_SPECIAL_CASE = 'wordnet_key_value_special_cases.txt'
+    WORDNET_DB_FILEPATH = '../wordnet_key_value.txt'
+    WORDNET_DB_FILEPATH_SPECIAL_CASE = '../wordnet_key_value_special_cases.txt'
     WORDNET_DB_DELIMITER = '|'
     STEMMER = None
 
