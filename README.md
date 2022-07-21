@@ -130,6 +130,12 @@ To facilitate the execution of the flow in a unified way, while enabling hyperpa
 python scan.py
 ```
 
+Once we have found the model with the best metrics, we can refine the selection of the hyperparameter "beam size" using the "beam_search.py" script.
+
+```
+python beam_search.py
+```
+
 # To dos:
 
 - Add configurations & steps to recreate paper results
