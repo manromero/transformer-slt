@@ -4,6 +4,10 @@ This repository fork of the orignal [transformer-slt](https://github.com/kayoyin
 
 The repository gathers data and code supporting the experiments in the paper [Better Sign Language Translation with STMC-Transformer](https://www.aclweb.org/anthology/2020.coling-main.525/).
 
+## Best model found
+
+It is possible to download the best pre-trained model found after performing the hyperparameter scan from [this link](https://uses0-my.sharepoint.com/:u:/g/personal/mignunolm_alum_us_es/EfoSQHcTTmpKhFg-QLRWkvUBcyJTTrukppj_ySMnCMHXrQ?e=vIPMCC).
+
 ## Installation
 
 May differs from the original in [transformer-slt](https://github.com/kayoyin/transformer-slt):
